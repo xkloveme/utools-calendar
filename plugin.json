@@ -1,0 +1,18 @@
+{
+  "pluginName": "calendar",
+  "description": "日历",
+  "version": "0.0.1",
+  "main": "dist/index.html",
+  "preload": "dist/preload.js",
+  "author": "xkloveme",
+  "homepage": "https://github.com/xkloveme",
+  "logo": "dist/icon.png",
+  "features": [
+    {
+      "code": "calendar",
+      "explain": "日历",
+      "cmds": ["calendar", "日历", "时间"],
+      "icon": "dist/icon.png"
+    }
+  ]
+}
