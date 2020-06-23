@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Title @handleReset="handleReset" @handleSearch="handleSearch"></Title>
+    <Title></Title>
     <div class="mdui-container-fluid" @click="showClass=false">
       <div class="mdui-row">
         <calendar ref="calendar"></calendar>

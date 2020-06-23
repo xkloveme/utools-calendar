@@ -68,12 +68,12 @@ export default {
     handleReset() {
       this.$emit('handleReset')
     },
-    handleSearch() {
-      this.$emit('handleSearch')
-    },
-    showPopup() {
-      this.$emit('showPopup')
-    }
+    // handleSearch() {
+    //   this.$emit('handleSearch')
+    // },
+    // showPopup() {
+    //   this.$emit('showPopup')
+    // }
   }
 }
 </script>

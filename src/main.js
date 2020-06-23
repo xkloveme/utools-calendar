@@ -3,13 +3,13 @@ import App from "./App.vue";
 import Api from "./utils/index";
 import store from "./store";
 import Vant from "./vant.js";
-
 // import "vuesax/dist/vuesax.min.css";
 
 Vue.use(Vant);
 Vue.config.productionTip = false;
 Vue.prototype.utools = window.utools;
 Vue.prototype.$api = Api;
+// Vue.prototype.$calendar = calendar;
 // eslint-disable-next-line no-undef
 if (process.env.NODE_ENV === "production") {
   window.utools.onPluginReady(() => {
