@@ -45,7 +45,6 @@ export default {
     }
   },
   mounted() {
-    console.log('🐛:: renderContent -> HEX', this.HEX)
     this.getAllHoliday(dayjs().format('YYYY'))
   },
   methods: {
@@ -175,11 +174,11 @@ export default {
     },
     beforeRender(year, month, next) {
       console.log('before-render', year, month)
+      this.HEX = this.getRandomColor()
       next()
     },
-    changeHandle(year, month) {
+    changeHandle(year) {
       this.getAllHoliday(year)
-      console.log('change', year, month)
     }
   }
 }
