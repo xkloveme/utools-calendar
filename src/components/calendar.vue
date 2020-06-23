@@ -40,13 +40,18 @@ export default {
     return {
       weekTitle: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
       holiday: [],
-      workday: []
+      workday: [],
+      HEX: this.getRandomColor()
     }
   },
   mounted() {
+    console.log('🐛:: renderContent -> HEX', this.HEX)
     this.getAllHoliday(dayjs().format('YYYY'))
   },
   methods: {
+    getRandomColor() {
+      return '#' + Math.floor(Math.random() * 16777215).toString(16)
+    },
     getAllHoliday(year) {
       let holidayList = []
       let workdayList = []
@@ -126,6 +131,12 @@ export default {
             weekend: isWeekend,
             holiday: isHoliday,
             'other-month': isOtherMonthDay
+          },
+          style: {
+            background: isToday ? this.HEX : '#fff',
+            ':hover': {
+              border: `2px solid ${this.HEX}`
+            }
           }
         },
         [
@@ -221,7 +232,7 @@ export default {
   background: #aba7a7;
 }
 .date-box.today {
-  background: #fb0;
+  background: #ccc;
   color: #fff;
 }
 .date-box.today .second-info {
@@ -238,7 +249,7 @@ export default {
   color: #999;
 }
 .date-box:hover {
-  border: 3px solid #fb0;
+  border: 2px solid #f0f0f0;
 }
 .title-box {
   font-size: 20px;
