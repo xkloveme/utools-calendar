@@ -75,21 +75,8 @@ export default {
               }
               self.holiday = holidayList
             }
-            if (item.workdays.length < 2) {
-              workdayList = workdayList.concat(item.workdays)
-            } else {
-              let days_work_passed = Math.round(
-                (dayjs(item.workdays[1]).valueOf() - dayjs(item.workdays[0]).valueOf()) / DAY
-              )
-              for (let index = 0; index < days_work_passed + 1; index++) {
-                workdayList.push(
-                  dayjs(item.workdays[0])
-                    .add(index, 'day')
-                    .format('YYYY-MM-DD')
-                )
-              }
-              self.workday = workdayList
-            }
+            workdayList = workdayList.concat(item.workdays)
+            self.workday = workdayList
           })
           console.log(
             list,
@@ -129,8 +116,7 @@ export default {
       var dateStr = `${year}-${this.twoDigit(month)}-${this.twoDigit(day)}`
 
       var isHoliday = !!~this.holiday.indexOf(dateStr) || isWeekend
-      var isWorkday = isWeekend ? !!~this.workday.indexOf(dateStr) : false
-      // console.log('🐛:: renderContent -> isHoliday', dayjs(dateStr).subtract(1, 'day').format('YYYY-MM-DD'),isWeekend, dateStr, isHoliday)
+      var isWorkday = !!~this.workday.indexOf(dateStr)
       return h(
         'div',
         {
@@ -167,6 +153,7 @@ export default {
             {
               class: {
                 sign: true,
+                isHoliday: isHoliday,
                 isWorkday: isWorkday
               }
             },
@@ -225,6 +212,10 @@ export default {
   color: #fff;
   line-height: 20px;
   text-align: center;
+}
+
+.isHoliday {
+  background: #f43;
 }
 .isWorkday {
   background: #aba7a7;
