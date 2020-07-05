@@ -5,6 +5,12 @@
         <h2>日历</h2>
       </template>
       <template #right>
+        <a class="title-icon" @click="handleAdd()" title="添加日程">
+          <van-icon name="plus" color="#2c3e50" />
+        </a>
+        <a class="title-icon" @click="handleList()" title="日程列表">
+          <van-icon name="orders-o" color="#2c3e50" />
+        </a>
         <a
           style="padding:0 1rem;"
           @click="open('https://github.com/xkloveme/utools-calendar')"
@@ -68,12 +74,12 @@ export default {
     handleReset() {
       this.$emit('handleReset')
     },
-    // handleSearch() {
-    //   this.$emit('handleSearch')
-    // },
-    // showPopup() {
-    //   this.$emit('showPopup')
-    // }
+    handleAdd() {
+      this.$emit('handleAdd')
+    },
+    handleList() {
+      this.$emit('handleList')
+    }
   }
 }
 </script>

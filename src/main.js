@@ -9,7 +9,6 @@ Vue.use(Vant);
 Vue.config.productionTip = false;
 Vue.prototype.utools = window.utools;
 Vue.prototype.$api = Api;
-// Vue.prototype.$calendar = calendar;
 // eslint-disable-next-line no-undef
 if (process.env.NODE_ENV === "production") {
   window.utools.onPluginReady(() => {

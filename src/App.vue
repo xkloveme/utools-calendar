@@ -1,6 +1,12 @@
 <template>
   <div id="app">
-    <Title></Title>
+    <Title @handleAdd="show=!show" @handleList="showList=!showList"></Title>
+    <van-popup v-model="show" position="left" :style="{ height: '100%',width:'40%' }">
+      <schedule v-if="show" @close="show=false" @refresh="refresh"/>
+    </van-popup>
+    <van-popup v-model="showList" position="right" :style="{ height: '100%',width:'40%' }">
+      <list v-if="showList" @close="showList=false" @refresh="refresh" />
+    </van-popup>
     <div class="mdui-container-fluid" @click="showClass=false">
       <div class="mdui-row">
         <calendar ref="calendar"></calendar>
@@ -12,17 +18,26 @@
 <script>
 import Title from './components/title.vue'
 import calendar from './components/calendar'
+import schedule from './components/schedule'
+import list from './components/list'
 export default {
   name: 'App',
   components: {
     Title,
-    calendar
+    calendar,
+    schedule,
+    list
   },
   data() {
     return {
+      show: false,
+      showList: false
     }
   },
   methods: {
+    refresh() {
+      this.$refs['calendar'].onLoad()
+    }
   }
 }
 </script>

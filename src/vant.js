@@ -1,11 +1,11 @@
 import {
-  // Button,
+  Button,
   // Col,
   // Row,
   Popup,
   // Checkbox,
   // CheckboxGroup,
-  // Field,
+  Field,
   // Picker,
   // RadioGroup,
   // Radio,
@@ -16,7 +16,7 @@ import {
   Toast,
   // Divider,
   // Empty,
-  // List,
+  List,
   // Progress,
   NavBar,
   // Pagination,
@@ -24,21 +24,24 @@ import {
   // Tabs,
   // Sticky,
   // DatetimePicker,
-  // Panel,
-  // Cell,
-  // CellGroup,
+  Panel,
+  Cell,
+  CellGroup,
   Icon,
-  // Switch,
+  Calendar,
+  Form,
+  Switch,
+  Tag
   // Skeleton,
 } from "vant";
 const components = [
-// Button,
+  Button,
   // Col,
   // Row,
   Popup,
   // Checkbox,
   // CheckboxGroup,
-  // Field,
+  Field,
   // Picker,
   // RadioGroup,
   // Radio,
@@ -49,7 +52,7 @@ const components = [
   Toast,
   // Divider,
   // Empty,
-  // List,
+  List,
   // Progress,
   NavBar,
   // Pagination,
@@ -57,17 +60,21 @@ const components = [
   // Tabs,
   // Sticky,
   // DatetimePicker,
-  // Panel,
-  // Cell,
-  // CellGroup,
+  Panel,
+  Cell,
+  CellGroup,
   Icon,
-  // Switch,
+  Calendar,
+  Form,
+  Switch,
+  Tag
   // Skeleton,
 ];
 const install = (Vue) => {
   components.forEach((component) => {
     Vue.component(component.name, component);
   });
+  Vue.prototype.$toast = Toast;
 };
 if (typeof window !== "undefined" && window.Vue) {
   install(window.Vue);
