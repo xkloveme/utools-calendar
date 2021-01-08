@@ -205,34 +205,23 @@ export default {
     getAllHoliday(year) {
       let holidayList = []
       let workdayList = []
-      let DAY = 1000 * 60 * 60 * 24
+      // let DAY = 1000 * 60 * 60 * 24
       let self = this
-      fetch(`https://www.jixiaokang.com/chinese-holidays-data/${year}.json`)
+      fetch(`https://raw.githubusercontent.com/NateScarlet/holiday-cn/master/${year}.json`)
         .then(res => {
           return res.json()
         })
         .then(function(list) {
-          list.data.map(item => {
-            if (item.freedays_range.length < 2) {
-              holidayList = holidayList.concat(item.freedays_range)
-            } else {
-              let days_passed = Math.round(
-                (dayjs(item.freedays_range[1]).valueOf() -
-                  dayjs(item.freedays_range[0]).valueOf()) /
-                  DAY
-              )
-              for (let index = 0; index < days_passed + 1; index++) {
-                holidayList.push(
-                  dayjs(item.freedays_range[0])
-                    .add(index, 'day')
-                    .format('YYYY-MM-DD')
-                )
-              }
+          list.days.map(item=>{
+            if (item.isOffDay==true) {
+              holidayList = holidayList.concat(item.date)
               self.holiday = holidayList
+            }else{
+              workdayList = workdayList.concat(item.date)
+              self.workday = workdayList
             }
-            workdayList = workdayList.concat(item.workdays)
-            self.workday = workdayList
           })
+
         })
     },
     twoDigit: function(num) {
