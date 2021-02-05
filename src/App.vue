@@ -1,14 +1,22 @@
 <template>
   <div id="app">
-    <Title @handleAdd="show=!show" @handleList="showList=!showList"></Title>
-    <van-popup v-model="show" position="left" :style="{ height: '100%',width:'40%' }">
-      <schedule v-if="show" @close="show=false" @refresh="refresh"/>
+    <Title @handleAdd="show = !show" @handleList="showList = !showList"></Title>
+    <van-popup
+      v-model="show"
+      position="left"
+      :style="{ height: '100%', width: '40%' }"
+    >
+      <schedule v-if="show" @close="show = false" @refresh="refresh" />
     </van-popup>
-    <van-popup v-model="showList" position="right" :style="{ height: '100%',width:'40%' }">
-      <list v-if="showList" @close="showList=false" @refresh="refresh" />
+    <van-popup
+      v-model="showList"
+      position="right"
+      :style="{ height: '100%', width: '40%' }"
+    >
+      <list v-if="showList" @close="showList = false" @refresh="refresh" />
     </van-popup>
-    <div class="mdui-container-fluid" @click="showClass=false">
-      <div class="mdui-row">
+    <div class="mdui-container-fluid" @click="showClass = false">
+      <div class="mdui-row" v-if="showCla">
         <calendar ref="calendar"></calendar>
       </div>
     </div>
@@ -26,19 +34,29 @@ export default {
     Title,
     calendar,
     schedule,
-    list
+    list,
   },
   data() {
     return {
       show: false,
-      showList: false
+      showList: false,
+      showCla: true,
     }
+  },
+  mounted() {
+    window.utools.onPluginReady(() => {
+      this.showCla = false
+      window.utools.onPluginEnter(({ code, type, payload }) => {
+        console.log('用户进入插件', code, type, payload)
+        this.showCla = true
+      })
+    })
   },
   methods: {
     refresh() {
       this.$refs['calendar'].onLoad()
-    }
-  }
+    },
+  },
 }
 </script>
 

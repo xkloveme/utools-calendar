@@ -141,7 +141,6 @@ export default {
     },
     onLoad() {
       this.$api.allDocsApi().then(res => {
-        console.log('🐛:: onLoad -> res', res)
         this.list = res.reverse()
         this.loading = false
         this.finished = true

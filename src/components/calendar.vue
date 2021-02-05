@@ -62,7 +62,6 @@ ChineseHolidays.ready(function(book, err) {
     return
   }
   book.all().forEach(function(holiday) {
-    console.log(holiday.name)
     console.log(
       holiday.days().map(function(date) {
         return date
@@ -207,23 +206,23 @@ export default {
       let workdayList = []
       let DAY = 1000 * 60 * 60 * 24
       let self = this
-      fetch(`https://www.jixiaokang.com/chinese-holidays-data/${year}.json`)
+      fetch(`http://chinese-holidays-data.basten.me/data/${year}.json`)
         .then(res => {
           return res.json()
         })
         .then(function(list) {
-          list.data.map(item => {
-            if (item.freedays_range.length < 2) {
-              holidayList = holidayList.concat(item.freedays_range)
+          list.map(item => {
+            if (item.range.length < 2) {
+              holidayList = holidayList.concat(item.range)
             } else {
               let days_passed = Math.round(
-                (dayjs(item.freedays_range[1]).valueOf() -
-                  dayjs(item.freedays_range[0]).valueOf()) /
+                (dayjs(item.range[1]).valueOf() -
+                  dayjs(item.range[0]).valueOf()) /
                   DAY
               )
               for (let index = 0; index < days_passed + 1; index++) {
                 holidayList.push(
-                  dayjs(item.freedays_range[0])
+                  dayjs(item.range[0])
                     .add(index, 'day')
                     .format('YYYY-MM-DD')
                 )
@@ -260,7 +259,6 @@ export default {
           schedule = item
         }
       })
-      console.log('🐛:: renderContent -> schedule', schedule)
 
       // 获取假期
       // this.getAllHoliday(year)
@@ -331,7 +329,6 @@ export default {
       )
     },
     beforeRender(year, month, next) {
-      console.log('before-render', year, month)
       this.HEX = this.getRandomColor()
       next()
     },
