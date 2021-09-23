@@ -212,8 +212,9 @@ export default {
         })
         .then(function(list) {
           list.map(item => {
+            var days = [];
             if (item.range.length < 2) {
-              holidayList = holidayList.concat(item.range)
+              days = days.concat(item.range)
             } else {
               let days_passed = Math.round(
                 (dayjs(item.range[1]).valueOf() -
@@ -221,17 +222,21 @@ export default {
                   DAY
               )
               for (let index = 0; index < days_passed + 1; index++) {
-                holidayList.push(
+                days.push(
                   dayjs(item.range[0])
                     .add(index, 'day')
                     .format('YYYY-MM-DD')
                 )
               }
-              self.holiday = holidayList
             }
-            workdayList = workdayList.concat(item.workdays)
-            self.workday = workdayList
+            if (item.type == 'holiday') {
+              holidayList = holidayList.concat(days);
+            } else {
+              workdayList = workdayList.concat(days);
+            }
           })
+          self.holiday = holidayList
+          self.workday = workdayList
         })
     },
     twoDigit: function(num) {
